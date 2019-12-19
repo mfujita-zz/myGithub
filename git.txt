@@ -1,4 +1,4 @@
-Aula 6. Configuração inicial do Git
+Aula 6 - Configuração inicial do Git
 Configurando o sistema
 $ git config --global user.name "Murilo Fujita"
 $ git config --global user.email "murilofujita@gmail.com"
@@ -10,7 +10,7 @@ $ git config user.email
 Listando todos os valores atribuídos na configuração
 $ git config --list
 
-Aula 7. Inicializando um repositório
+Aula 7 - Inicializando um repositório
 Crie um diretório
 $ mkdir myGithub
 Entre neste diretório
@@ -18,7 +18,7 @@ $ cd myGithub
 Inicie o monitoramento dos arquivos a partir deste diretório-raiz
 $ git init
 
-Aula 9. O ciclo de vida dos status de seus arquivos
+Aula 9 - O ciclo de vida dos status de seus arquivos
 Estados dos arquivos no ciclo de vida
 
 Untracked &rarr; Unmodified &rarr; Modified &rarr; Staged
@@ -113,7 +113,7 @@ Observação: usar o reset --hard causará a seguinte situação: o git mostrar�
 Aula 13 - Criando um repositório no Github
 Todas as instruções do quick setup apareceram quando não foi colocado não selecionado para criar o arquivo readme.
 
-Aula 14. Criando e Adicionando uma chave SSH
+Aula 14 - Criando e Adicionando uma chave SSH
 
 Aula 15 - Ligando repositório local a um remoto
 $ git remote add origin https://github.com/mfujita/myGithub.git
