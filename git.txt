@@ -1,0 +1,164 @@
+Aula 6. Configuração inicial do Git
+Configurando o sistema
+$ git config --global user.name "Murilo Fujita"
+$ git config --global user.email "murilofujita@gmail.com"
+Configurar o editor de texto
+$ git config --global core.editor sublime/vim/emacs
+Verificando qual o valor atribuído
+$ git config user.name
+$ git config user.email
+Listando todos os valores atribuídos na configuração
+$ git config --list
+
+Aula 7. Inicializando um repositório
+Crie um diretório
+$ mkdir myGithub
+Entre neste diretório
+$ cd myGithub
+Inicie o monitoramento dos arquivos a partir deste diretório-raiz
+$ git init
+
+Aula 9. O ciclo de vida dos status de seus arquivos
+Estados dos arquivos no ciclo de vida
+
+Untracked &rarr; Unmodified &rarr; Modified &rarr; Staged
+
+Untracked: não é rastreado e o git desconhece sua existência
+Unmodified: Não teve modificação
+Modified: Arquivo que teve mofificação
+Staged: arquivo afetado pelo comando commit.
+
+Um commit é a criação de uma imagem dos arquivos que estão sendo monitorados pelo git.
+
+Adicione o(s) arquivo(s) que serão monitorados pelo git:
+$ git add readme.md
+Faça o commit:
+$ git commit -m "Primeiro commit."
+
+Observação 1: sempre analise o cenário com o comando git status.
+Observação 2: caso apareça a mensagem:
+
+On branch master
+Changes not staged for commit:
+        modified:   readme.md
+
+Significa que nada foi adicionado para acontecer o commit. Corrija através do comando
+$ git add <arquivo>
+para só então realizar o commit:
+$ git commit -m "nova descrição"
+
+Aula 10 - Visualizando logs
+
+Visualize o histórico dos commits.
+$ git log
+
+commit 1fed672a9473d092d401d3238fb4f77139cf63fa (HEAD -> master)
+Author: Murilo Fujita <murilofujita@gmail.com>
+Date:   Wed Dec 18 19:52:45 2019 -0300
+
+    atualizado 1.
+
+commit 380e8296c40f9f9c17dcb05c2984f0f64f6a44d7
+Author: Murilo Fujita <murilofujita@gmail.com>
+Date:   Wed Dec 18 19:44:06 2019 -0300
+
+    Primeiro commit.
+
+Algumas variações da visualização dos logs.
+$ git log --decorate
+$ git log --author="Murilo Fujita"
+Comando para visualizar de forma resumida o autor e as mensagens de commits.
+$ git shortlog
+Comando para visualizar de forma resumida apenas o nome e a quantidade.
+$ git shortlog -sn
+Git exibindo as branches
+$ git log --graph
+Se quiser detalhes específicos do commit, digite o comando git log e em seguida copie a hash do commit desejado
+$ git show [hash]
+
+Aula 11 - Visualizando o diff
+Estes comandos são feitos antes de realizar o commit. Desta forma é possível saber quais foram as mudanças antes de realizar o commit.
+As linhas na cor verde (sinal de + no início da linha) indicam quais foram adicionadas.
+$ git diff
+Para saber somente os arquivos que foram modificados
+$ git diff --name-only
+Observação: Caso já tenha colocado na área de staged, o git diff não mostra diferenças.
+
+Aula 12 - Desfazendo as coisas
+Este comando é válido somente se houve alterações no arquivo e logo em seguida desistiu do que fez (não fez "git add [arquivo]").
+$ git checkout [arquivo]
+
+Caso já tenha colocado na área de stage através do comando "git add [arquivo]", o comando é:
+$ git reset HEAD [arquivo] 
+
+$ git reset HEAD readme.md
+Unstaged changes after reset:
+M       readme.md
+
+Geralmente se quis remover o arquivo da área staged, também quer desfazer as modificações do arquivo. Então:
+$ git checkout [arquivo]
+
+Nesta situação, o commit foi feito. 3 níveis de desfazer.
+soft: elimina o commit, mas o arquivo permanece na área de staged (depois do git add e antes do git commit).
+mixed: elimina o commit e deixa o arquivo antes do git add (modified da cor verde).
+hard: extermina tudo que foi feito (modified da cor vermelha). O arquivo local ainda tem a alteração feita.
+Observação: a hash escolhida deve ser a do commit específico (voltar 1, 2 ou n posições do histórico).
+
+$ git reset --hard 1e73c557f51f75750f57be7a21e357b12fdae83c
+HEAD is now at 1e73c55 Esta é a aula 12.
+
+Observação: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parãmetro force.
+
+
+Aula 13 - Criando um repositório no Github
+Todas as instruções do quick setup apareceram quando não foi colocado não selecionado para criar o arquivo readme.
+
+Aula 14. Criando e Adicionando uma chave SSH
+
+Aula 15 - Ligando repositório local a um remoto
+$ git remote add origin https://github.com/mfujita/myGithub.git
+
+Nome do repositório padrão ao qual local e remoto estão ligados
+$ git remote
+origin
+
+Informações mais detalhadas
+$ git remote -v
+origin  https://github.com/mfujita/myGithub.git (fetch)
+origin  https://github.com/mfujita/myGithub.git (push)
+
+Enviando logs e demais informações para o repositório remoto.
+$ git push -u origin master
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (9/9), 806 bytes | 403.00 KiB/s, done.
+Total 9 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/mfujita/myGithub.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+Aula 16 - Enviando mudanças para um repositório remoto
+$ git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 298 bytes | 298.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/mfujita/myGithub.git
+   1e73c55..4498c53  master -> master
+
+Aula 17 - Clonando repositórios remotos
+Clonando através de HTTPS
+$ git clone https://github.com/mfujita/myGithub.git [nome_do_seu_projeto]
+Clonando através de SSH
+$ git clone git@github.com:mfujita/myGithub.git [nome_do_seu_projeto]
+
+Aula 25 - Criando o .gitignore
+Crie um arquivo denominado .gitignore e configure para determinar quais arquivos não serão monitorados pelo git.
+Pode ser pela extensão ou o nome específico do arquivo.
+Para um modelo completo acesse https://github.com/github/gitignore
