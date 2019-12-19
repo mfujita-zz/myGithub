@@ -1,10 +1,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-</head>
-<style>
+  <style>
   h3 { text-align: center; background-color: lightblue; }
 </style>
+</head>
+
 <body>
 <h3>Índice</h3>
 <ol>
