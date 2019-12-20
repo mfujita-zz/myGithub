@@ -1,0 +1,225 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+p { font-family: arial; }  
+  
+h3 {
+  padding-left: 5%;
+}
+
+code {
+  height: 30px;
+  background-color: #CCC;
+} 
+
+.codigo {
+  font-family:consolas;
+}
+  </style>
+</head>
+<body>
+
+<h3>Aula 6 - Configuração inicial do Git</h3>
+<p>Configurando o sistema</p>
+<code>$ git config --global user.name "Murilo Fujita"</code>
+<br>
+<code>$ git config --global user.email "murilofujita@gmail.com"</code>
+<p>Configurar o editor de texto</p>
+<code>$ git config --global core.editor sublime/vim/emacs</code>
+<p>Verificando qual o valor atribuído
+<br>
+<code>$ git config user.name</code>
+<br>
+<code>$ git config user.email</code>
+<p>Listando todos os valores atribuídos na configuração
+<br>
+<code>$ git config --list</code>
+
+<h3>Aula 7 - Inicializando um repositório</h3>
+<p>Crie um diretório
+<br>
+<code>$ mkdir myGithub</code>
+<p>Entre neste diretório
+<br>
+<code>$ cd myGithub</code>
+<p>Inicie o monitoramento dos arquivos a partir deste diretório-raiz
+<br>
+<code>$ git init</code>
+
+<h3>Aula 9 - O ciclo de vida dos status de seus arquivos</h3>
+<p>Estados dos arquivos no ciclo de vida
+
+<p>Untracked &rarr; Unmodified &rarr; Modified &rarr; Staged
+
+<ul>
+<li>Untracked: não é rastreado e o git desconhece sua existência
+<li>Unmodified: Não teve modificação
+<li>Modified: Arquivo que teve mofificação
+<li>Staged: arquivo afetado pelo comando commit.
+</ul>
+<p>Um commit é a criação de uma imagem dos arquivos que estão sendo monitorados pelo git.
+
+<p>Adicione o(s) arquivo(s) que serão monitorados pelo git:
+<code>$ git add readme.md</code>
+<p>Faça o commit:
+<code>$ git commit -m "Primeiro commit."</code>
+
+<p>Observação 1: sempre analise o cenário com o comando git status.
+<p>Observação 2: caso apareça a mensagem:
+
+<pre>
+On branch master
+Changes not staged for commit:
+        modified:   readme.md
+</pre>
+
+<p>Significa que nada foi adicionado para acontecer o commit. Corrija através do comando
+<br>
+<code>$ git add [arquivo]</code>
+<p>para só então realizar o commit:
+<code>$ git commit -m "nova descrição"</code>
+
+<h3>Aula 10 - Visualizando logs</h3>
+
+<p>Visualize o histórico dos commits.
+<code>$ git log</code>
+
+<pre>
+commit 1fed672a9473d092d401d3238fb4f77139cf63fa (HEAD -> master)
+Author: Murilo Fujita <murilofujita@gmail.com>
+Date:   Wed Dec 18 19:52:45 2019 -0300
+
+    atualizado 1.
+
+commit 380e8296c40f9f9c17dcb05c2984f0f64f6a44d7
+Author: Murilo Fujita <murilofujita@gmail.com>
+Date:   Wed Dec 18 19:44:06 2019 -0300
+
+    Primeiro commit.
+</pre>
+
+<p>Algumas variações da visualização dos logs.
+<br>
+<code>$ git log --decorate</code>
+<br>
+<code>$ git log --author="Murilo Fujita"</code>
+<p>Comando para visualizar de forma resumida o autor e as mensagens de commits.
+<br>
+<code>$ git shortlog</code>
+<p>Comando para visualizar de forma resumida apenas o nome e a quantidade.
+<br>
+<code>$ git shortlog -sn</code>
+<p>Git exibindo as branches
+<br>
+<code>$ git log --graph</code>
+<p>Se quiser detalhes específicos do commit, digite o comando git log e em seguida copie a hash do commit desejado
+<br>
+<code>$ git show [hash]</code>
+
+<h3>Aula 11 - Visualizando o diff</h3>
+<p>Estes comandos são feitos antes de realizar o commit. Desta forma é possível saber quais foram as mudanças antes de realizar o commit.
+<p>As linhas na cor verde (sinal de + no início da linha) indicam quais foram adicionadas.
+<br>
+<code>$ git diff</code>
+<p>Para saber somente os arquivos que foram modificados
+<br>
+<code>$ git diff --name-only</code>
+<p>Observação: Caso já tenha colocado na área de staged, o git diff não mostra diferenças.
+
+<h3>Aula 12 - Desfazendo as coisas</h3>
+<p>Este comando é válido somente se houve alterações no arquivo e logo em seguida desistiu do que fez (não fez "git add [arquivo]").
+<br>
+<code>$ git checkout [arquivo]</code>
+
+<p>Caso já tenha colocado na área de stage através do comando "git add [arquivo]", o comando é:
+<br>
+<code>$ git reset HEAD [arquivo]</code> 
+<br>
+<code>$ git reset HEAD readme.md</code>
+<br>Unstaged changes after reset:
+<br>M       readme.md
+
+Geralmente se quis remover o arquivo da área staged, também quer desfazer as modificações do arquivo. Então:
+<br>
+<code>$ git checkout [arquivo]</code>
+
+<p>Nesta situação, o commit foi feito. 3 níveis de desfazer.
+<ul>
+<li>soft: elimina o commit, mas o arquivo permanece na área de staged (depois do git add e antes do git commit).
+<li>mixed: elimina o commit e deixa o arquivo antes do git add (modified da cor verde).
+<li>hard: extermina tudo que foi feito (modified da cor vermelha). O arquivo local ainda tem a alteração feita.
+</ul>
+<p>Observação: a hash escolhida deve ser a do commit específico (voltar 1, 2 ou n posições do histórico).
+<br>
+<code>$ git reset --hard 1e73c557f51f75750f57be7a21e357b12fdae83c
+<br>HEAD is now at 1e73c55 Esta é a aula 12.
+</code>
+<p>Observação: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parãmetro force.
+
+
+<h3>Aula 13 - Criando um repositório no Github</h3>
+<p>Todas as instruções do quick setup apareceram quando não foi colocado não selecionado para criar o arquivo readme.
+
+<h3>Aula 14 - Criando e Adicionando uma chave SSH</h3>
+
+<h3>Aula 15 - Ligando repositório local a um remoto</h3>
+<code>$ git remote add origin https://github.com/mfujita/myGithub.git</code>
+
+<p>Nome do repositório padrão ao qual local e remoto estão ligados
+<code>$ git remote</code>
+<br>
+<pre>
+origin
+</pre>
+
+Informações mais detalhadas
+<code>$ git remote -v</code>
+<pre>
+origin  https://github.com/mfujita/myGithub.git (fetch)
+origin  https://github.com/mfujita/myGithub.git (push)
+</pre>
+<p>Enviando logs e demais informações para o repositório remoto.
+<br>
+<code>$ git push -u origin master</code>
+<pre>
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (9/9), 806 bytes | 403.00 KiB/s, done.
+Total 9 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/mfujita/myGithub.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+</pre>
+
+<h3>Aula 16 - Enviando mudanças para um repositório remoto</h3>
+<code>$ git push origin master</code>
+<pre>
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 298 bytes | 298.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/mfujita/myGithub.git
+   1e73c55..4498c53  master -> master
+</pre>
+
+<h3>Aula 17 - Clonando repositórios remotos</h3>
+<p>Clonando através de HTTPS
+<br>
+<code>$ git clone https://github.com/mfujita/myGithub.git [nome_do_seu_projeto]</code>
+<p>Clonando através de SSH
+<br>
+<code>$ git clone git@github.com:mfujita/myGithub.git [nome_do_seu_projeto]</code>
+
+<h3>Aula 25 - Criando o .gitignore</h3>
+<p>Crie um arquivo denominado .gitignore e configure para determinar quais arquivos não serão monitorados pelo git.
+<p>Pode ser pela extensão ou o nome específico do arquivo.
+<p>Para um modelo completo acesse https://github.com/github/gitignore
+
