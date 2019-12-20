@@ -16,8 +16,8 @@ code {
   background-color: #CCC;
 } 
 
-.codigo {
-  font-family:consolas;
+span {
+  text-decoration: underline;
 }
   </style>
 </head>
@@ -66,10 +66,11 @@ code {
 <p>Adicione o(s) arquivo(s) que serão monitorados pelo git:
 <code>$ git add readme.md</code>
 <p>Faça o commit:
+<br>
 <code>$ git commit -m "Primeiro commit."</code>
 
-<p>Observação 1: sempre analise o cenário com o comando git status.
-<p>Observação 2: caso apareça a mensagem:
+<p><span>Observação 1</span>: sempre analise o cenário com o comando git status.
+<p><span>Observação 2</span>: caso apareça a mensagem:
 
 <pre>
 On branch master
@@ -129,7 +130,7 @@ Date:   Wed Dec 18 19:44:06 2019 -0300
 <p>Para saber somente os arquivos que foram modificados
 <br>
 <code>$ git diff --name-only</code>
-<p>Observação: Caso já tenha colocado na área de staged, o git diff não mostra diferenças.
+<p><span>Observação</span>: Caso já tenha colocado na área de staged, o git diff não mostra diferenças.
 
 <h3>Aula 12 - Desfazendo as coisas</h3>
 <p>Este comando é válido somente se houve alterações no arquivo e logo em seguida desistiu do que fez (não fez "git add [arquivo]").
@@ -154,12 +155,12 @@ Geralmente se quis remover o arquivo da área staged, também quer desfazer as m
 <li>mixed: elimina o commit e deixa o arquivo antes do git add (modified da cor verde).
 <li>hard: extermina tudo que foi feito (modified da cor vermelha). O arquivo local ainda tem a alteração feita.
 </ul>
-<p>Observação: a hash escolhida deve ser a do commit específico (voltar 1, 2 ou n posições do histórico).
+<p><span>Observação</span>: a hash escolhida deve ser a do commit específico (voltar 1, 2 ou n posições do histórico).
 <br>
 <code>$ git reset --hard 1e73c557f51f75750f57be7a21e357b12fdae83c
 <br>HEAD is now at 1e73c55 Esta é a aula 12.
 </code>
-<p>Observação: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parãmetro force.
+<p><span>Observação</span>: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parãmetro force.
 
 
 <h3>Aula 13 - Criando um repositório no Github</h3>
