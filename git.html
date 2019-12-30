@@ -19,6 +19,10 @@ code {
 span {
   text-decoration: underline;
 }
+
+pre {
+  font-size: 14px;
+}
   </style>
 </head>
 <body>
@@ -58,7 +62,7 @@ span {
 <ul>
 <li>Untracked: não é rastreado e o git desconhece sua existência
 <li>Unmodified: Não teve modificação
-<li>Modified: Arquivo que teve mofificação
+<li>Modified: Arquivo que teve modificação
 <li>Staged: arquivo afetado pelo comando commit.
 </ul>
 <p>Um commit é a criação de uma imagem dos arquivos que estão sendo monitorados pelo git.
@@ -154,15 +158,24 @@ Geralmente se quis remover o arquivo da área staged, também quer desfazer as m
 <p>Nesta situação, o commit foi feito. 3 níveis de desfazer.
 <ul>
 <li>soft: elimina o commit, mas o arquivo permanece na área de staged (depois do git add e antes do git commit).
+   <ul>
+      <li>staged &rarr; modified
+   </ul>
 <li>mixed: elimina o commit e deixa o arquivo antes do git add (modified da cor verde).
+   <ul>
+      <li>staged &rarr; unmodified
+   </ul>
 <li>hard: extermina tudo que foi feito (modified da cor vermelha). O arquivo local ainda tem a alteração feita.
+   <ul>
+      <li>staged &rarr; untracked
+   </ul>
 </ul>
 <p><span>Observação</span>: a hash escolhida deve ser a do commit específico (voltar 1, 2 ou n posições do histórico).
 <br>
 <code>$ git reset --hard 1e73c557f51f75750f57be7a21e357b12fdae83c
 <br>HEAD is now at 1e73c55 Esta é a aula 12.
 </code>
-<p><span>Observação</span>: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parãmetro force.
+<p><span>Observação</span>: usar o reset --hard causará a seguinte situação: o git mostrará diferenças entre o está no remoto e o que você tem (local). A única forma de atualizar deixando-os iguais é através do parâmetro force.
 
 
 <h3>Aula 13 - Criando um repositório no Github</h3>
@@ -174,8 +187,8 @@ Geralmente se quis remover o arquivo da área staged, também quer desfazer as m
 <code>$ git remote add origin https://github.com/mfujita/myGithub.git</code>
 
 <p>Nome do repositório padrão ao qual local e remoto estão ligados
-<code>$ git remote</code>
 <br>
+<code>$ git remote</code>
 <pre>
 origin
 </pre>
